@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夏炜琰 · 个人简介</title>
+  <style>
+    :root {
+      --bg: #fdf8f4; --surface: #ffffff; --accent: #c07d5a;
+      --accent2: #e8b89a; --text: #3d2e24; --sub: #8a7060;
+      --border: #ede3d9; --tag-bg: #f5ece4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── nav ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 48px; height: 60px; background: rgba(253,248,244,.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; }
+    .nav-brand { font-size: 15px; font-weight: 600; color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { text-decoration: none; font-size: 14px; color: var(--sub); transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── hero ── */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 32px 40px; position: relative; overflow: hidden; }
+    .hero::before { content:''; position: absolute; top: -80px; right: -100px; width: 540px; height: 540px; border-radius: 50%; background: radial-gradient(circle,#f5e0ce44,transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 720px; width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+    .hero-text .greeting { font-size: 13px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-text h1 { font-size: clamp(36px,6vw,56px); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+    .hero-text h1 span { color: var(--accent); }
+    .hero-text .tagline { font-size: 15px; color: var(--sub); line-height: 1.8; margin-bottom: 32px; max-width: 400px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 10px 24px; border-radius: 40px; font-size: 14px; text-decoration: none; transition: all .2s; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #fff; border: 2px solid var(--accent); }
+    .btn-primary:hover { background: #a96848; border-color: #a96848; }
+    .btn-outline { background: transparent; color: var(--accent); border: 2px solid var(--accent2); }
+    .btn-outline:hover { background: var(--tag-bg); }
+    .hero-avatar { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg,var(--accent2),var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 72px; flex-shrink: 0; box-shadow: 0 8px 32px #c07d5a22; }
+
+    /* ── sections ── */
+    section { padding: 80px 32px; }
+    .container { max-width: 720px; margin: 0 auto; }
+    .section-label { font-size: 12px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 40px; }
+    section:nth-child(odd) { background: var(--surface); }
+
+    /* ── about cards ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .about-card { background: var(--bg); border-radius: 16px; padding: 22px; border: 1px solid var(--border); }
+    .about-card .icon { font-size: 26px; margin-bottom: 10px; }
+    .about-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+    .about-card p { font-size: 13px; color: var(--sub); line-height: 1.65; }
+
+    /* ── skills ── */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag { background: var(--tag-bg); color: var(--accent); border: 1px solid var(--accent2); padding: 6px 16px; border-radius: 40px; font-size: 13px; font-weight: 500; }
+
+    /* ── project cards (可点击) ── */
+    .project-list { display: flex; flex-direction: column; gap: 16px; }
+    .project-card {
+      background: var(--bg); border-radius: 16px; padding: 22px;
+      border: 1px solid var(--border); display: flex; gap: 18px;
+      align-items: flex-start; cursor: pointer;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px #c07d5a18; border-color: var(--accent2); }
+    .project-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg,var(--accent2),var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .project-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .project-card p { font-size: 13px; color: var(--sub); line-height: 1.6; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .ptag { font-size: 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; color: var(--sub); }
+    .card-hint { font-size: 11px; color: var(--accent2); margin-top: 8px; }
+
+    /* ── contact ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; background: var(--bg); border-radius: 14px; padding: 18px 20px; border: 1px solid var(--border); }
+    .contact-icon { font-size: 22px; }
+    .contact-item .label { font-size: 11px; color: var(--sub); }
+    .contact-item .value { font-size: 14px; font-weight: 500; }
+
+    footer { text-align: center; padding: 28px; font-size: 12px; color: var(--sub); border-top: 1px solid var(--border); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(61,46,36,.45);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--surface); border-radius: 20px;
+      max-width: 560px; width: 100%;
+      max-height: 80vh; overflow-y: auto;
+      padding: 32px; position: relative;
+      box-shadow: 0 24px 60px #3d2e2430;
+      transform: translateY(20px) scale(.97);
+      transition: transform .25s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--tag-bg); border: none; cursor: pointer;
+      font-size: 16px; color: var(--sub);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .modal-close:hover { background: var(--accent2); color: #fff; }
+    .modal-icon { font-size: 36px; margin-bottom: 12px; }
+    .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .modal-sub { font-size: 13px; color: var(--sub); margin-bottom: 20px; }
+    .modal-section { margin-bottom: 18px; }
+    .modal-section h4 { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+    .modal-section p { font-size: 14px; color: var(--text); line-height: 1.75; }
+    .modal-section ul { padding-left: 18px; }
+    .modal-section li { font-size: 14px; color: var(--text); line-height: 1.9; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modal-tag { background: var(--tag-bg); color: var(--accent); border: 1px solid var(--accent2); padding: 4px 14px; border-radius: 30px; font-size: 12px; }
+    .modal-link { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent2); }
+    .modal-link-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .btn-copy { padding: 8px 18px; border-radius: 30px; font-size: 12px; background: var(--tag-bg); color: var(--accent); border: 1px solid var(--accent2); cursor: pointer; transition: all .2s; font-family: inherit; }
+    .btn-copy:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-copy.copied { background: #6aaa7c; color: #fff; border-color: #6aaa7c; }
+
+    /* ── fade-up ── */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-avatar { margin: 0 auto; width: 130px; height: 130px; font-size: 52px; }
+      .hero-btns { justify-content: center; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">夏炜琰</span>
+  <div class="nav-links">
+    <a href="#about">关于</a>
+    <a href="#skills">技能</a>
+    <a href="#projects">项目</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text fade-up">
+      <p class="greeting">Hello, World 👋</p>
+      <h1>我是<span>夏炜琰</span></h1>
+      <p class="tagline">华北水利水电大学软件工程专业在读，热爱编程与创意开发，探索 AI 与艺术交叉的无限可能。</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">查看项目</a>
+        <a href="#contact" class="btn btn-outline">联系我</a>
+      </div>
+    </div>
+    <div class="hero-avatar fade-up" style="transition-delay:.15s">🦊</div>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <p class="section-label fade-up">About Me</p>
+    <h2 class="section-title fade-up">关于我</h2>
+    <div class="about-grid">
+      <div class="about-card fade-up"><div class="icon">🎓</div><h3>教育背景</h3><p>华北水利水电大学<br>信息工程学院 · 软件工程</p></div>
+      <div class="about-card fade-up" style="transition-delay:.1s"><div class="icon">💡</div><h3>研究方向</h3><p>生成式 AI 应用、前端创意开发、深度学习与水文模型</p></div>
+      <div class="about-card fade-up" style="transition-delay:.2s"><div class="icon">🎮</div><h3>兴趣爱好</h3><p>游戏（燕云十六声）、Three.js 粒子特效、独立创意项目</p></div>
+      <div class="about-card fade-up" style="transition-delay:.3s"><div class="icon">🌱</div><h3>当前目标</h3><p>深入掌握 AI 编程工具链，构建有温度的创意应用</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label fade-up">Skills</p>
+    <h2 class="section-title fade-up">技术技能</h2>
+    <div class="skills-grid fade-up">
+      <span class="skill-tag">Python</span><span class="skill-tag">Java</span>
+      <span class="skill-tag">JavaScript</span><span class="skill-tag">HTML / CSS</span>
+      <span class="skill-tag">React</span><span class="skill-tag">Three.js</span>
+      <span class="skill-tag">MySQL</span><span class="skill-tag">PyTorch</span>
+      <span class="skill-tag">Git</span><span class="skill-tag">Linux</span>
+      <span class="skill-tag">DeepSeek API</span><span class="skill-tag">Claude Code</span>
+      <span class="skill-tag">Servlet / JSP</span><span class="skill-tag">MCP 协议</span>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label fade-up">Projects</p>
+    <h2 class="section-title fade-up">项目经历 <span style="font-size:13px;color:var(--sub);font-weight:400">· 点击卡片查看详情</span></h2>
+    <div class="project-list">
+
+      <div class="project-card fade-up" onclick="openModal('flower')">
+        <div class="project-icon">🌸</div>
+        <div style="flex:1">
+          <h3>花卉粒子特效系统</h3>
+          <p>基于 Three.js / WebGL 的实时粒子特效，探索生成艺术与交互视觉的结合。</p>
+          <div class="project-tags">
+            <span class="ptag">Three.js</span><span class="ptag">WebGL</span><span class="ptag">GLSL</span>
+          </div>
+          <p class="card-hint">→ 点击查看详情</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:.1s" onclick="openModal('restaurant')">
+        <div class="project-icon">🍜</div>
+        <div style="flex:1">
+          <h3>在线餐厅点餐系统</h3>
+          <p>Java Web 全栈项目，实现菜品展示、购物车、订单管理完整功能。</p>
+          <div class="project-tags">
+            <span class="ptag">Java</span><span class="ptag">Servlet/JSP</span><span class="ptag">MySQL</span>
+          </div>
+          <p class="card-hint">→ 点击查看详情</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:.2s" onclick="openModal('hydro')">
+        <div class="project-icon">💧</div>
+        <div style="flex:1">
+          <h3>TorchHydro 水文模型实验</h3>
+          <p>基于 PyTorch 的水文深度学习框架，完成系统设计、UML 建模与测试报告。</p>
+          <div class="project-tags">
+            <span class="ptag">PyTorch</span><span class="ptag">深度学习</span><span class="ptag">UML</span>
+          </div>
+          <p class="card-hint">→ 点击查看详情</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:.3s" onclick="openModal('react')">
+        <div class="project-icon">⚛️</div>
+        <div style="flex:1">
+          <h3>互动工具 · React Artifact</h3>
+          <p>基于 React 构建的交互式 Web 工具集，部署于 GitHub Pages，支持在线即开即用。</p>
+          <div class="project-tags">
+            <span class="ptag">React</span><span class="ptag">JavaScript</span><span class="ptag">GitHub Pages</span>
+          </div>
+          <p class="card-hint">→ 点击查看详情</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-up" style="transition-delay:.35s" onclick="openModal('portfolio')">
+        <div class="project-icon">🌐</div>
+        <div style="flex:1">
+          <h3>个人简介网站（本站）</h3>
+          <p>借助 DeepSeek V4 生成式大模型辅助编码完成，部署于 GitHub Pages。</p>
+          <div class="project-tags">
+            <span class="ptag">HTML/CSS/JS</span><span class="ptag">GitHub Pages</span><span class="ptag">DeepSeek V4</span>
+          </div>
+          <p class="card-hint">→ 点击查看详情</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label fade-up">Contact</p>
+    <h2 class="section-title fade-up">联系方式</h2>
+    <div class="contact-grid fade-up">
+      <div class="contact-item"><span class="contact-icon">🏫</span><div><div class="label">院校</div><div class="value">华北水利水电大学</div></div></div>
+      <div class="contact-item"><span class="contact-icon">📚</span><div><div class="label">专业</div><div class="value">软件工程</div></div></div>
+      <div class="contact-item"><span class="contact-icon">💻</span><div><div class="label">GitHub</div><div class="value">github.com/88xwyqb</div></div></div>
+      <div class="contact-item"><span class="contact-icon">📮</span><div><div class="label">邮箱</div><div class="value">3039722660@qq.com</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 夏炜琰 &nbsp;·&nbsp; 由 DeepSeek V4 辅助生成代码 &nbsp;·&nbsp; 部署于 GitHub Pages</footer>
+
+<!-- ── Modal 弹窗 ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ── 项目详情数据 ─────────────────────────────────────────────────────
+const projects = {
+  flower: {
+    icon: '🌸',
+    title: '花卉粒子特效系统',
+    sub: '生成艺术 · 创意开发',
+    bg: `<p>受 TouchDesigner 风格视觉工作流的启发，探索在 Web 端实现实时粒子艺术的可能性。项目以花卉的生长、凋零与聚散为核心意象，将数学函数与物理模拟相结合，生成具有自然感的动态视觉效果。</p>`,
+    highlights: [
+      'GPU 加速粒子系统：基于 BufferGeometry + ShaderMaterial，管理 50,000+ 粒子实例，保持 60fps 流畅渲染',
+      '五种花卉视觉特效：花瓣飘落、绽放、旋涡、凋零、粒子聚合成花朵轮廓，预留扩展接口',
+      '自动运镜系统：集成 20 种预设相机路径（螺旋环绕、正弦波推拉、随机漫游、聚焦跟随等），参数化平滑切换',
+      '丰富交互控制：空格键切换效果、数字键切换运镜、鼠标点击触发粒子爆炸',
+      '视觉风格：粒子带粉/红/白/紫颜色渐变，透明度与大小随生命周期变化，深色背景发光感',
+      '单 HTML 文件即开即用：零依赖构建工具，打开即体验完整粒子艺术效果',
+    ],
+    tags: ['Three.js', 'WebGL', 'GLSL Shader', 'GPU Particles', 'JavaScript'],
+    link: null,
+  },
+  restaurant: {
+    icon: '🍜',
+    title: '在线餐厅点餐系统',
+    sub: 'Java Web 全栈 · 课程项目',
+    bg: `<p>面向中小型餐饮企业的 B/S 架构点餐管理系统，涵盖用户端与后台管理端，完成从需求分析、系统设计到联调测试的完整工程流程。</p>`,
+    highlights: [
+      '用户端：菜品分类浏览、加入购物车、提交订单、查看订单状态',
+      '管理端：菜品 CRUD、订单状态管理、营业额统计',
+      '采用 MVC 分层架构，Servlet 处理路由与业务逻辑，JSP 负责视图渲染',
+      'MySQL 设计 6 张业务表（用户、菜品、分类、购物车、订单、订单详情）',
+      '使用 AJAX 实现购物车数量异步更新，无需整页刷新',
+      '输出完整软件工程文档：需求分析、概要设计、详细设计（N-S图、流程图）',
+    ],
+    tags: ['Java', 'Servlet', 'JSP', 'Tomcat', 'MySQL', 'AJAX', 'HTML/CSS'],
+    link: null,
+  },
+  hydro: {
+    icon: '💧',
+    title: 'TorchHydro 水文模型实验',
+    sub: '深度学习 · 水文预测 · 软件工程实验',
+    bg: `<p>TorchHydro 是一个基于 PyTorch 的水文深度学习框架，支持 LSTM、Transformer 等模型用于径流预测。本项目为《软件工程》课程实验，完成了从可行性分析、需求分析、系统设计到软件测试的完整工程流程，产出了规范的实验报告文档。</p>`,
+    highlights: [
+      '系统支持普通用户（安装配置、数据准备、模型评估）与管理员（模型管理、任务监控）双角色',
+      '基于 PyTorch 实现 LSTM 径流预测模型，支持 CAMELS 等多流域数据集',
+      '绘制完整 UML 建模：系统架构图、类图、E-R 图、功能结构图、数据流图',
+      '详细设计产出：N-S 流程图、顺序图、活动图（含泳道），覆盖训练与预测全流程',
+      '设计 16 项黑盒测试用例，覆盖数据预处理、模型训练、预测输出等核心功能模块',
+      '输出约 20 页规范实验报告，含可行性分析（经济/技术/操作/社会）与需求规格说明',
+    ],
+    tags: ['PyTorch', 'Python', 'LSTM', 'Transformer', 'UML', '水文预测', '软件工程'],
+    link: null,
+  },
+  react: {
+    icon: '⚛️',
+    title: '互动工具 · React Artifact',
+    sub: 'React 前端 · 交互式 Web 应用',
+    bg: `<p>基于 React 构建的交互式 Web 工具集，借助 Claude Artifact 与生成式 AI 辅助开发，提供即开即用的在线工具体验。项目包含多个独立部署的互动页面，覆盖不同场景的用户需求。</p>`,
+    highlights: [
+      '使用 React 函数式组件 + Hooks 管理状态，代码结构清晰、可维护性强',
+      '响应式布局适配桌面与移动端，良好的跨设备用户体验',
+      '借助 AI 辅助编码快速迭代，从 idea 到可运行原型效率大幅提升',
+      '部署于 GitHub Pages，支持在线访问，无需本地环境即可使用',
+      '包含多个独立工具页面，每个页面聚焦单一交互场景，简洁实用',
+    ],
+    tags: ['React', 'JavaScript', 'HTML/CSS', 'AI 辅助开发', 'GitHub Pages'],
+    link: 'https://88xwyqb.github.io/for--xiaoxin/',
+  },
+  portfolio: {
+    icon: '🌐',
+    title: '个人简介网站（本站）',
+    sub: 'AI 辅助开发 · 前端实践',
+    bg: `<p>以《科技前沿系列讲座》课程结课报告选做内容为背景，借助 DeepSeek V4 与 Claude Sonnet 4.6 完成整站代码生成与调试，探索生成式大模型在真实前端工程任务中的实际效果。</p>`,
+    highlights: [
+      '全程使用自然语言提示词驱动代码生成，从零到可运行初稿约 2 分钟',
+      '通过 3 轮多轮对话迭代，完成配色调优、响应式断点修复、弹窗交互新增',
+      'CSS 变量系统统一管理主题色，支持一键换色',
+      'IntersectionObserver 实现滚动淡入动画，无第三方依赖',
+      '项目卡片 Modal 弹窗：点击展开详情，ESC / 点遮罩关闭',
+      '部署至 GitHub Pages，从上传到上线全程约 5 分钟',
+    ],
+    tags: ['HTML', 'CSS', 'JavaScript', 'DeepSeek V4', 'Claude Sonnet 4.6', 'GitHub Pages'],
+    link: 'https://88xwyqb.github.io/portfolio/',
+  },
+};
+
+// ── Modal 逻辑 ────────────────────────────────────────────────────────
+function openModal(key) {
+  const p = projects[key];
+  const tagsHtml = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+  const listHtml = p.highlights.map(h => `<li>${h}</li>`).join('');
+  const linkHtml = p.link ? `
+    <div class="modal-link-row">
+      <a class="modal-link" href="${p.link}" target="_blank">🔗 访问网站 →</a>
+      <button class="btn-copy" onclick="copyLink(event, '${p.link}')">📋 复制链接</button>
+    </div>` : '';
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-icon">${p.icon}</div>
+    <div class="modal-title">${p.title}</div>
+    <div class="modal-sub">${p.sub}</div>
+    <div class="modal-section"><h4>项目介绍</h4>${p.bg}</div>
+    <div class="modal-section"><h4>主要内容</h4><ul>${listHtml}</ul></div>
+    <div class="modal-section"><h4>技术栈</h4><div class="modal-tags">${tagsHtml}</div></div>
+    ${linkHtml}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copyLink(e, url) {
+  e.stopPropagation();
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = e.target;
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 复制链接';
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(() => {
+    // fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = e.target;
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 复制链接';
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── 滚动淡入 ──────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── 平滑导航 ──────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
